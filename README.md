@@ -30,29 +30,29 @@ Python ve Django kullanılarak geliştirilen bu proje, saha randevularını yön
 Aşağıdaki adımları izleyerek projeyi yerel ortamınızda çalıştırabilirsiniz:
 
 ### 1. Repozitoyu klonlayın:
-
 ```bash
 git clone https://github.com/ffreyr/Randevu-Saha.git
 cd Randevu-Saha
-
+```
 ### 2. Sanal ortam oluşturun ve aktif edin:
-
+```bash
 python -m venv env
 env\Scripts\activate
-
+```
 ### 3. Gereksinimleri yükleyin:
-
+```bash
 pip install -r requirements.txt
-
+```
 ### 4. Veritabanı işlemleri:
-
+```bash
 python manage.py makemigrations
 python manage.py migrate
-
+```
 ### 5. Süper kullanıcı oluşturun (admin paneli için):
-
+```bash
 python manage.py createsuperuser
-
+```
 ### 6. Sunucuyu başlatın:
-
-python manage.py runserver
+```bash
+python manage.py runserver 
+```
