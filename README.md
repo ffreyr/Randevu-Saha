@@ -61,14 +61,22 @@ python manage.py runserver
 
 ## 📁 Proje Yapısı
 ```bash
-Randevu-Saha/
-├── appointments/       # Randevu işlemleri uygulaması
-├── fields/             # Saha yönetimi uygulaması
-├── users/              # Kullanıcı kayıt ve oturum işlemleri
-├── randevusaha/        # Proje ayarları ve URL yönlendirmeleri
-├── templates/          # HTML şablonları
-├── static/             # Statik dosyalar (CSS, JS, img)
-├── manage.py
-├── requirements.txt
-└── README.md
+randevu-saha/
+├── .git/                  # Git versiyon kontrol klasörü
+├── config/                # Django ayarlarını içeren config uygulaması
+├── main/                  # Uygulamanın ana fonksiyonlarını barındıran klasör
+│   ├── migrations/        # Veritabanı migration dosyaları
+│   ├── static/            # Statik dosyalar (CSS, JS, resimler)
+│   ├── templates/         # HTML şablonları
+│   ├── admin.py           # Admin arayüz tanımları
+│   ├── apps.py            # Uygulama konfigürasyonu
+│   ├── forms.py           # Form tanımlamaları
+│   ├── models.py          # Veritabanı modelleri
+│   ├── serializers.py     # API serializer'ları
+│   ├── tests.py           # Test dosyası
+│   ├── urls.py            # Uygulama URL yönlendirmeleri
+│   └── views.py           # View fonksiyonları
+├── manage.py              # Django yönetim komut dosyası
+├── requirements.txt       # Proje bağımlılıkları
+└── README.md              # Proje tanıtım dosyası
 ```
