@@ -56,3 +56,19 @@ python manage.py createsuperuser
 ```bash
 python manage.py runserver 
 ```
+
+---
+
+## 📁 Proje Yapısı
+```bash
+Randevu-Saha/
+├── appointments/       # Randevu işlemleri uygulaması
+├── fields/             # Saha yönetimi uygulaması
+├── users/              # Kullanıcı kayıt ve oturum işlemleri
+├── randevusaha/        # Proje ayarları ve URL yönlendirmeleri
+├── templates/          # HTML şablonları
+├── static/             # Statik dosyalar (CSS, JS, img)
+├── manage.py
+├── requirements.txt
+└── README.md
+```
