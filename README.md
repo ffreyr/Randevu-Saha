@@ -80,3 +80,5 @@ randevu-saha/
 ├── requirements.txt       # Proje bağımlılıkları
 └── README.md              # Proje tanıtım dosyası
 ```
+
+## Hazırlayan: Arda Kaya
