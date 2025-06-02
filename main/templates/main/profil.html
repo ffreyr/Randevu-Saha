@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Profil Bilgilerim - RandevuSaha{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <h2>Profil Bilgilerim</h2>
+    
+    <form method="post" class="profile-form">
+        {% csrf_token %}
+        
+        <div class="profile-content">
+            <div class="profile-info-section">
+                <div class="form-group">
+                    <label for="username">Kullanıcı Adı</label>
+                    <input type="text" id="username" value="{{ user.username }}" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="first_name">Ad</label>
+                    <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="last_name">Soyad</label>
+                    <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-posta</label>
+                    <input type="email" id="email" name="email" value="{{ user.email }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="user_type">Kullanıcı Tipi</label>
+                    <input type="text" id="user_type" value="{{ user.get_user_type_display }}" disabled>
+                </div>
+            </div>
+
+            <div class="password-section">
+                <h3>Şifre Değiştir</h3>
+                
+                <div class="form-group">
+                    <label for="current_password">Mevcut Şifre</label>
+                    <input type="password" id="current_password" name="current_password">
+                </div>
+
+                <div class="form-group">
+                    <label for="new_password">Yeni Şifre</label>
+                    <input type="password" id="new_password" name="new_password">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Yeni Şifre (Tekrar)</label>
+                    <input type="password" id="confirm_password" name="confirm_password">
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn">Bilgileri Güncelle</button>
+    </form>
+</div>
+{% endblock %} 

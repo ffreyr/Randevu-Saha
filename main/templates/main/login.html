@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Giriş Yap - RandevuSaha{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Giriş Yap</h2>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Kullanıcı Adı</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Şifre</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">Giriş Yap</button>
+    </form>
+    <p style="text-align: center; margin-top: 1rem;">
+        Hesabınız yok mu? <a href="{% url 'register' %}" style="color: var(--primary-color);">Kayıt Ol</a>
+    </p>
+</div>
+{% endblock %}

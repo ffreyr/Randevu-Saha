@@ -1,0 +1,10 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    <h2>Çıkış Yapıldı</h2>
+    <p>Başarıyla çıkış yaptınız.</p>
+    <a href="{% url 'home' %}">Anasayfaya Dön</a>
+</div>
+{% endblock %}

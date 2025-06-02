@@ -1,0 +1,326 @@
+/* Rezervasyon Formu Stilleri */
+.rezervasyon-form {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.rezervasyon-form h3 {
+    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4CAF50;
+}
+
+.rezervasyon-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.rezervasyon-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+/* Tarih ve Saat Seçici Container */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Tarih Seçici Stili */
+.rezervasyon-form input[type="date"] {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rezervasyon-form input[type="date"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Saat Seçici Stili */
+.hour-select {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem center;
+    background-size: 1em;
+}
+
+.hour-select:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.hour-select option {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Form Butonları */
+.rezervasyon-form .btn-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.rezervasyon-form .btn {
+    flex: 1;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.rezervasyon-form .btn-primary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.rezervasyon-form .btn-primary:hover {
+    background-color: #45a049;
+    transform: translateY(-1px);
+}
+
+.rezervasyon-form .btn-secondary {
+    background-color: #f44336;
+    color: white;
+}
+
+.rezervasyon-form .btn-secondary:hover {
+    background-color: #da190b;
+    transform: translateY(-1px);
+}
+
+/* Ödeme Bölümü */
+.payment-section {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.payment-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.payment-section p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .rezervasyon-form {
+        padding: 1rem;
+    }
+
+    .rezervasyon-form .btn-group {
+        flex-direction: column;
+    }
+}
+
+/* Alert Mesajları */
+.alert-container {
+    margin: 1rem 0;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.3s ease-out;
+}
+
+.alert-error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Saha Detay Kartı */
+.saha-detail-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 900px; /* Kartın maksimum genişliğini artırdık */
+    width: 95%; /* Daha fazla ekran alanı kullanmasını sağladık */
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Bilgi ve form bölümleri için sütunlar */
+    gap: 3rem; /* Bölümler arası boşluk */
+    align-items: start;
+}
+
+/* Mobil cihazlar için responsive düzenleme */
+@media (max-width: 992px) {
+    .saha-detail-card {
+        grid-template-columns: 1fr; /* Mobil cihazlarda tek sütun */
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Profil Sayfası Stilleri */
+.profile-container {
+    max-width: 960px; /* Kartın maksimum genişliğini biraz daha artırdık */
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container h2 {
+    color: #333;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4CAF50;
+}
+
+.profile-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* İki eşit sütun */
+    gap: 3rem; /* Bölümler arası boşluk */
+    align-items: start; /* Öğeleri yukarı hizala */
+}
+
+.profile-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="email"],
+.profile-form input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.profile-form input[type="text"]:focus,
+.profile-form input[type="email"]:focus,
+.profile-form input[type="password"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.profile-form input[disabled] {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.password-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.password-section h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.profile-form .btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.profile-form .btn:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 992px) {
+    .profile-content {
+        grid-template-columns: 1fr; /* Mobil cihazlarda tek sütun */
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+} 

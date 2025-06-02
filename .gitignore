@@ -1,0 +1,26 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# SQLite DB
+db.sqlite3
+
+# Environment
+.env
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# Editor configs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Django migration cache (opsiyonel)
+*/migrations/__pycache__/
+

@@ -1,0 +1,85 @@
+<!-- Tüm sayfa, varsa base.html dosyasını miras alır -->
+{% extends 'main/base.html' %}
+{% load static %}  <!-- static dosyaları yüklemek için -->
+
+{% block title %}Saha Listesi - RandevuSaha{% endblock %}
+
+{% block content %}
+<div class="saha-container">
+    <div class="search-section">
+        <h2>Saha Ara</h2>
+        <form method="get" class="search-form">
+            <div class="search-inputs">
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Saha Adı" value="{{ request.GET.name }}">
+                </div>
+            </div>
+            <button type="submit" class="btn search-btn">
+                <i class="fas fa-search"></i> Ara
+            </button>
+        </form>
+    </div>
+
+    <div class="saha-grid">
+        {% for saha in sahalar %}
+        <div class="saha-card">
+            <div class="saha-header">
+                <h3>{{ saha.name }}</h3>
+                {% if user.user_type == 'owner' and saha.owner == user %}
+                <div class="saha-actions">
+                    <a href="{% url 'saha_duzenle' saha.id %}" class="btn-icon" title="Düzenle">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="{% url 'saha_sil' saha.id %}" class="btn-icon delete" title="Sil" onclick="return confirm('Bu sahayı silmek istediğinizden emin misiniz?')">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+                {% endif %}
+                {% if user.is_authenticated and user.user_type == 'standard' %}
+                <form method="post" action="{% url 'favori_toggle' saha.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    {% if saha in user.favorite_sahalar.all %}
+                        <button type="submit" class="btn-icon" title="Favorilerden Çıkar">
+                            <i class="fas fa-heart-broken" style="color:red;"></i>
+                        </button>
+                    {% else %}
+                        <button type="submit" class="btn-icon" title="Favorilere Ekle">
+                            <i class="fas fa-heart" style="color:red;"></i>
+                        </button>
+                    {% endif %}
+                </form>
+                {% endif %}
+            </div>
+            <div class="saha-info">
+                <p><i class="fas fa-map-marker-alt"></i> {{ saha.address }}</p>
+                <p><i class="fas fa-phone"></i> {{ saha.phone }}</p>
+                <p><i class="fas fa-clock"></i> {{ saha.opening_hours }}</p>
+            </div>
+            <div class="saha-footer">
+                <a href="{% url 'saha_detay' saha.id %}" class="btn">
+                    {% if user.user_type == 'standard' %}
+                        <i class="fas fa-calendar-check"></i> Rezervasyon Yap
+                    {% else %}
+                        <i class="fas fa-calendar-check"></i>
+                    {% endif %}
+                </a>
+                
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-saha">
+            <i class="fas fa-search"></i>
+            <p>Aradığınız kriterlere uygun saha bulunamadı.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if user.user_type == 'owner' %}
+    <div class="add-saha">
+        <a href="{% url 'saha_ekle' %}" class="btn">
+            <i class="fas fa-plus"></i> Yeni Saha Ekle
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

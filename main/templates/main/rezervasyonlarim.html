@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Rezervasyonlarım - RandevuSaha{% endblock %}
+
+{% block content %}
+<div class="rezervasyonlar-container">
+    <div class="rezervasyonlar-header">
+        <h2>Rezervasyonlarım</h2>
+        <p>Toplam {{ rezervasyonlar|length }} rezervasyonunuz bulunuyor.</p>
+    </div>
+
+    {% if rezervasyonlar %}
+    <div class="rezervasyonlar-grid">
+        {% for rezervasyon in rezervasyonlar %}
+        <div class="rezervasyon-card">
+            <div class="rezervasyon-header">
+                <h3>{{ rezervasyon.saha.name }}</h3>
+                <span class="rezervasyon-tarih">
+                    <i class="fas fa-calendar"></i>
+                    {{ rezervasyon.date|date:"d.m.Y" }}
+                </span>
+            </div>
+
+            <div class="rezervasyon-info">
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <span>{{ rezervasyon.hour_range }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>{{ rezervasyon.saha.address }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>{{ rezervasyon.saha.phone }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-tag"></i>
+                    <span>{{ rezervasyon.saha.hourly_price }} ₺</span>
+                </div>
+            </div>
+
+            <div class="rezervasyon-footer">
+                <a href="{{ rezervasyon.saha.location_url }}" target="_blank" class="btn btn-outline">
+                    <i class="fas fa-map"></i> Haritada Göster
+                </a>
+                <a href="{% url 'rezervasyon_iptal' rezervasyon.id %}" class="btn btn-danger" onclick="return confirm('Bu rezervasyonu iptal etmek istediğinizden emin misiniz?')">
+                    <i class="fas fa-times"></i> İptal Et
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-rezervasyon">
+        <i class="fas fa-calendar-times"></i>
+        <h3>Henüz Rezervasyonunuz Yok</h3>
+        <p>Hemen bir saha rezervasyonu yapmak için sahaları inceleyebilirsiniz.</p>
+        <a href="{% url 'saha_listesi' %}" class="btn">
+            <i class="fas fa-search"></i> Sahaları İncele
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Favori Sahalarım - RandevuSaha{% endblock %}
+
+{% block content %}
+<div class="saha-container">
+    <h2 style="text-align:center; color:var(--primary-color); margin-bottom:2rem;">
+        <i class="fas fa-heart" style="color:red;"></i> Favori Sahalarım
+    </h2>
+    <div class="saha-grid">
+        {% for saha in favori_sahalar %}
+        <div class="saha-card">
+            <div class="saha-header">
+                <h3>{{ saha.name }}</h3>
+                <form method="post" action="{% url 'favori_toggle' saha.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-icon" title="Favorilerden Çıkar">
+                        <i class="fas fa-heart-broken" style="color:red;"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="saha-info">
+                <p><i class="fas fa-map-marker-alt"></i> {{ saha.address }}</p>
+                <p><i class="fas fa-phone"></i> {{ saha.phone }}</p>
+                <p><i class="fas fa-clock"></i> {{ saha.opening_hours }}</p>
+            </div>
+            <div class="saha-footer">
+                <a href="{% url 'saha_detay' saha.id %}" class="btn">
+                    <i class="fas fa-calendar-check"></i> Detay & Rezervasyon
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-saha">
+            <i class="fas fa-heart-broken" style="font-size:3rem; color:red;"></i>
+            <p>Henüz favori sahalarınız yok.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %} 

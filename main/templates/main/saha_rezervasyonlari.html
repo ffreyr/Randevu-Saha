@@ -1,0 +1,59 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ saha.name }} Rezervasyonları{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="rezervasyonlar-container">
+        <div class="rezervasyonlar-header">
+            <h2>{{ saha.name }} Rezervasyonları</h2>
+            <p>Bu sahaya ait tüm rezervasyonları aşağıda görebilirsiniz.</p>
+        </div>
+
+        {% if rezervasyonlar %}
+        <div class="rezervasyonlar-grid">
+            {% for rezervasyon in rezervasyonlar %}
+            <div class="rezervasyon-card">
+                <div class="rezervasyon-header">
+                    <h3>{{ rezervasyon.saha.name }}</h3>
+                    <span class="rezervasyon-tarih">
+                        <i class="far fa-calendar-alt"></i> {{ rezervasyon.date|date:"d M Y" }}
+                        <i class="far fa-clock"></i> {{ rezervasyon.hour_range }}
+                    </span>
+                </div>
+                <div class="rezervasyon-info">
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <p><strong>Rezervasyon Sahibi:</strong> {{ rezervasyon.user.username }}</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <p><strong>Telefon:</strong> {{ rezervasyon.user.phone_number|default:"Belirtilmemiş" }}</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-info-circle"></i>
+                        <p><strong>Durum:</strong> Aktif</p> {# Rezervasyon durum bilgisi eklenebilir #}
+                    </div>
+                     <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <p><strong>Rezervasyon Zamanı:</strong> {{ rezervasyon.created_at|date:"d M Y H:i" }}</p>
+                    </div>
+                </div>
+                {% comment %}
+                <div class="rezervasyon-footer">
+                     <a href="{% url 'rezervasyon_iptal' rezervasyon.id %}" class="btn btn-danger btn-sm">İptal Et</a>
+                </div>
+                {% endcomment %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-rezervasyon">
+            <i class="fas fa-calendar-times"></i>
+            <h3>Bu sahaya ait henüz bir rezervasyon bulunmamaktadır.</h3>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %} 

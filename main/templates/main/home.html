@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Ana Sayfa - RandevuSaha{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    {% if user.is_authenticated %}
+        <h2>Hoş Geldiniz, {{ user.username }}!</h2>
+        <div class="welcome-message">
+            <p>RandevuSaha'ya hoş geldiniz. Hemen bir saha rezervasyonu yapabilir veya sahalarınızı yönetebilirsiniz.</p>
+        </div>
+        <div class="home-buttons">
+            {% if user.user_type == 'owner' %}
+                <a href="{% url 'saha_listesi' %}" class="btn">Sahalarımı Yönet</a>
+            {% else %}
+                <a href="{% url 'saha_listesi' %}" class="btn">Saha Ara</a>
+            {% endif %}
+            <a href="{% url 'rezervasyonlarim' %}" class="btn">Rezervasyonlarım</a>
+        </div>
+    {% else %}
+        <h2>RandevuSaha'ya Hoş Geldiniz</h2>
+        <div class="welcome-message">
+            <p>Halı saha rezervasyonlarınızı kolayca yapın, maçlarınızı planlayın.</p>
+        </div>
+        <div class="home-buttons">
+            <a href="{% url 'login' %}" class="btn">Giriş Yap</a>
+            <a href="{% url 'register' %}" class="btn">Kayıt Ol</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

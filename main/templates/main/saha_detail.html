@@ -1,0 +1,131 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{{ saha.name }} - RandevuSaha{% endblock %}
+
+{% block content %}
+<div class="saha-detail-container">
+    <div class="saha-detail-card">
+        <div class="saha-detail-header">
+            <h2>{{ saha.name }}</h2>
+            {% if user.is_authenticated and user.user_type == 'standard' %}
+                <form method="post" action="{% url 'favori_toggle' saha.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    {% if saha in user.favorite_sahalar.all %}
+                        <button type="submit" class="btn btn-outline" title="Favorilerden Çıkar">
+                            <i class="fas fa-heart-broken" style="color:red;"></i> Favorilerden Çıkar
+                        </button>
+                    {% else %}
+                        <button type="submit" class="btn btn-outline" title="Favorilere Ekle">
+                            <i class="fas fa-heart" style="color:red;"></i> Favorilere Ekle
+                        </button>
+                    {% endif %}
+                </form>
+            {% endif %}
+            {% if user.user_type == 'owner' and saha.owner == user %}
+            <div class="saha-actions">
+                <a href="{% url 'saha_duzenle' saha.id %}" class="btn-icon" title="Düzenle">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="{% url 'saha_sil' saha.id %}" class="btn-icon delete" title="Sil" onclick="return confirm('Bu sahayı silmek istediğinizden emin misiniz?')">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="saha-detail-info">
+            <div class="info-group">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h3>Adres</h3>
+                    <p>{{ saha.address }}</p>
+                </div>
+            </div>
+
+            <div class="info-group">
+                <i class="fas fa-phone"></i>
+                <div>
+                    <h3>Telefon</h3>
+                    <p>{{ saha.phone }}</p>
+                </div>
+            </div>
+
+            <div class="info-group">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h3>Çalışma Saatleri</h3>
+                    <p>{{ saha.opening_hours }}</p>
+                </div>
+            </div>
+
+            <div class="info-group">
+                <i class="fas fa-tag"></i>
+                <div>
+                    <h3>Saatlik Ücret</h3>
+                    <p>{{ saha.hourly_price }} ₺</p>
+                </div>
+            </div>
+
+            <div class="info-group">
+                <i class="fas fa-map"></i>
+                <div>
+                    <h3>Konum</h3>
+                    <a href="{{ saha.location_url }}" target="_blank" class="map-link">
+                        <i class="fas fa-external-link-alt"></i> Haritada Göster
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        {% if messages %}
+        <div class="alert-container">
+            {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="rezervasyon-form">
+            <h3>Rezervasyon Yap</h3>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ form.date.id_for_label }}">Tarih</label>
+                        {{ form.date }}
+                        {% if form.date.errors %}
+                        <div class="error-message">{{ form.date.errors }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.hour_range.id_for_label }}">Saat</label>
+                        {{ form.hour_range }}
+                        {% if form.hour_range.errors %}
+                        <div class="error-message">{{ form.hour_range.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" name="form_submit" class="btn btn-primary">Rezervasyon Yap</button>
+                </div>
+            </form>
+
+            {% if show_payment %}
+            <div class="payment-section">
+                <h3>Ödeme Bilgileri</h3>
+                <p>Toplam Tutar: {{ saha.hourly_price }} ₺</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="btn-group">
+                        <button type="submit" name="odeme_onayla" class="btn btn-primary">Ödemeyi Onayla</button>
+                        <button type="submit" name="iptal_et" class="btn btn-secondary">İptal Et</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

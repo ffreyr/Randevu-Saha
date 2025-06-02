@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="saha-form-container">
+    <div class="saha-form-header">
+        <h2><i class="fas fa-plus-circle"></i> Yeni Halısaha Ekle</h2>
+        <p>Halısahanızın bilgilerini doldurun ve sisteme ekleyin.</p>
+    </div>
+
+    <form method="post" class="saha-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="id_name"><i class="fas fa-futbol"></i> Saha Adı</label>
+            <input type="text" name="name" id="id_name" required placeholder="Örn: Yeşil Vadi Halısaha">
+        </div>
+
+        <div class="form-group">
+            <label for="id_address"><i class="fas fa-map-marker-alt"></i> Adres</label>
+            <textarea name="address" id="id_address" rows="3" required placeholder="Halısahanın tam adresini girin"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="id_phone"><i class="fas fa-phone"></i> Telefon</label>
+            <input type="tel" name="phone" id="id_phone" required placeholder="Örn: 0555 555 55 55">
+        </div>
+
+        <div class="form-group">
+            <label for="id_hourly_price"><i class="fas fa-lira-sign"></i> Saatlik Ücret</label>
+            <input type="number" name="hourly_price" id="id_hourly_price" step="0.01" required placeholder="Örn: 150.00">
+        </div>
+
+        <div class="form-group">
+            <label for="id_location_url"><i class="fas fa-map"></i> Google Maps Linki</label>
+            <input type="url" name="location_url" id="id_location_url" required placeholder="Google Maps'ten konum paylaşım linkini yapıştırın">
+            <small class="form-text">Google Maps'te konumunuzu bulun, "Paylaş" butonuna tıklayın ve "Haritayı paylaş" linkini kopyalayın.</small>
+        </div>
+
+        <input type="hidden" name="owner" value="{{ request.user.id }}">
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Halısahayı Kaydet
+            </button>
+            <a href="{% url 'saha_listesi' %}" class="btn btn-outline">
+                <i class="fas fa-times"></i> İptal
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
