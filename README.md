@@ -20,8 +20,8 @@ Python ve Django kullanılarak geliştirilen bu proje, saha randevularını yön
 - Python 3.x  
 - Django 4.x  
 - SQLite3 (varsayılan, PostgreSQL uyumlu)  
-- Bootstrap 5  
-- HTML, CSS, JavaScript  
+- Django Rest Framework 
+- HTML, CSS 
 
 ---
 
